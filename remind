@@ -48,7 +48,7 @@ try:
             f"Set a reminder after {hour} {unitHour} and {minutes} {unitMinutes}")
         sleep(seconds)
     print(" ".join(sa[2:]))
-    playsound('/home/attarwala/bin/alarm.mpeg')
+    playsound('YOUR_REMINDER_TUNE_FILEPATH_HERE') 
 except KeyboardInterrupt:
     print("Interrupted by user")
     sys.exit(1)
