@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+import string
+import sys
+from time import sleep
+from playsound import playsound
+
+sa = sys.argv
+lsa = len(sys.argv)
+if lsa < 3:
+    print("Usage: [ python ] Reminder.py duration_in_minutes Message_to_print")
+    print("Example: [ python ] Reminder.py 10 Call dad")
+    print("Use a value of 0 minutes for testing the alarm immediately.")
+    print("Press Ctrl-C to terminate the alarm clock early.")
+    sys.exit(1)
+
+try:
+    rt = sa[1].split(":")
+    hour = int(rt[0])
+    minutes = int(rt[1])
+except ValueError:
+    print("Invalid numeric value (%s) for hours:minutes" % sa[1])
+    print("Should be an integer >= 0")
+    sys.exit(1)
+
+if minutes < 0 or minutes > 60:
+    print("Invalid value for minutes, should be >= 0 and < 60")
+    sys.exit(1)
+if hour < 0:
+    print("Invalid value of Hours, should be >=0 ")
+    sys.exit(1)
+
+seconds = minutes * 60 + hour * 3600
+
+if hour > 1:
+    unitHour = "hours"
+else:
+    unitHour = "hour"
+
+if minutes > 1:
+    unitMinutes = "minutes"
+else:
+    unitMinutes = "minute"
+
+
+try:
+    if minutes > 0:
+        print(
+            f"Set a reminder after {hour} {unitHour} and {minutes} {unitMinutes}")
+        sleep(seconds)
+    print(" ".join(sa[2:]))
+    playsound('/home/attarwala/bin/alarm.mpeg')
+except KeyboardInterrupt:
+    print("Interrupted by user")
+    sys.exit(1)
